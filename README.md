@@ -27,5 +27,8 @@ The bot can also search and locate the top 5 hyperlinks of the subjects you want
 ![image](https://user-images.githubusercontent.com/105527191/220520596-c71a3d31-204f-4307-8b05-2e1f535962b4.png)
 
 ## What is the RNN test?
-The RNN test file is an alternative way I used to build the chatbot.
+The RNN test folder is an alternative way I used to build the chatbot.
+
 The code is working, but it requires a larger database to run. The larger the database, the more accuracy with the RNN model
+
+If you have a larger database for testing, replace ```trainbot.py``` and ```chatai.py``` with the files in RNN test folder
