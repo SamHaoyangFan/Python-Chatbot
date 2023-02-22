@@ -1,3 +1,4 @@
+
 import nltk
 from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
@@ -63,36 +64,37 @@ def getResponse(ints, intents_json):
 
 def chatbot_response(msg):
     msg_lower = msg.lower()
-    if msg_lower.startswith('my name is') or msg_lower.startswith('i am') or msg_lower.startswith("i'm") or msg_lower.startswith("im"):
-        if msg_lower.startswith('my name is'):
+    if any(word in msg_lower for word in ['my name is', 'i am', "i'm", 'im']):
+        if 'my name is' in msg_lower:
             name = msg[11:]
-        elif msg_lower.startswith('i am'):
+        elif 'i am' in msg_lower:
             name = msg[5:]
-        elif msg_lower.startswith("i'm"):
+        elif "i'm" in msg_lower:
             name = msg[4:]
         else:
             name = msg[3:]
         ints = predict_class(msg, model)
-        res1 = getResponse(ints, intents)
-        res = res1.replace("{n}",name)
-    elif msg_lower.startswith("find") or msg_lower.startswith("search"):
-        if msg_lower.startswith("find"):
+        if not ints:
+            res = "Sorry, I don't understand. Can you please rephrase your question?"
+        else:
+            res1 = getResponse(ints, intents)
+            res = res1.replace("{n}",name)
+    elif any(word in msg_lower for word in ['find', 'search']):
+        if 'find' in msg_lower:
             query = msg[5:]  # Extract the search query from the message
-            results = search(query, num_results=5)  # Call the search() function from the googlesearch library
-            if results:
-                res = "Here are the top 5 search results for " + query + ":\n\n" + "\n\n".join(results)
-            else:
-                res = "Sorry, no results found for that query."
         else:
             query = msg[7:]
-            results = search(query, num_results=5)
-            if results:
-                res = "Here are the top 5 search results for " + query + ":\n\n" + "\n\n".join(results)
-            else:
-                res = "Sorry, no results found for that query."
+        results = search(query, num_results=5)  # Call the search() function from the googlesearch library
+        if results:
+            res = "Here are the top 5 search results for " + query + ":\n\n" + "\n\n".join(results)
+        else:
+            res = "Sorry, no results found for that query."
     else:
         ints = predict_class(msg, model)
-        res = getResponse(ints, intents)
+        if not ints:
+            res = "Sorry, I don't understand. Can you please rephrase your question?"
+        else:
+            res = getResponse(ints, intents)
     return res
 
 
