@@ -12,6 +12,11 @@ Please follow the following step inside your command prompt:
 
 ```python chatai.py```
 
+## Approach
+```trainbot.py``` will train the data from the local databse, and compile the model with SGD
+```chatai.py``` set up the bot response, GUI, and several other functions (such as search function)
+```intent.json``` stores the words/sentence that bot will be respond to, it is the database
+
 ## Chatbot AI
 ![image](https://user-images.githubusercontent.com/105527191/220520316-a690562a-1572-4e69-9a85-e93fee9211c9.png)
 
