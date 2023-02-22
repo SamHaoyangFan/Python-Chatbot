@@ -16,7 +16,7 @@ model = keras.models.load_model('chatbot_model.h5')
 
 intents = json.loads(open('intents.json').read())
 words = pickle.load(open('words.pkl','rb'))
-classes = pickle.load(open('classes.pkl','rb'))
+classes = pickle.load(open('ai_response.pkl','rb'))
 
 
 def clean_up_sentence(sentence):
